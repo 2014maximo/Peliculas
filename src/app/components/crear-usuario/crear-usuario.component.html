@@ -1,0 +1,100 @@
+
+<p-messages [(value)]="msgs"></p-messages>
+
+<div class="container">
+  <div class="col">
+    <h1>Crear usuario</h1><br>
+    <button routerLink="/listar-usuarios" class="btn btn-primary">Volver
+    </button>
+    <hr>
+
+    <form [formGroup]="form">
+
+      <div>
+        Nombre
+        <input formControlName="nombre" type="text" 
+          maxlength="30" (input)="agregarAlCorreo($event.target.value)"><br/>
+        <p-message severity="error" 
+          *ngIf="form.get('nombre').hasError('required')" 
+          text="El campo es requerido"></p-message>
+        <p-message severity="error" 
+          *ngIf="form.get('nombre').hasError('minlength') || form.get('nombre').hasError('maxlength')" 
+          text="El campo no cumple la longitud esperada"></p-message>
+        <p-message severity="error" 
+          *ngIf="form.get('nombre').hasError('pattern')" 
+          text="No es un nombre valido">
+        </p-message>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputEmail1">Telefono</label>
+        <input formControlName="telefono" 
+            type="text" class="form-control" 
+            value="{{form.get('telefono').value | formatoTelefono}}"><br/>
+        <p-message severity="error" 
+          *ngIf="form.get('telefono').hasError('required')" 
+          text="El campo es requerido"></p-message>
+        <p-message severity="error" 
+          *ngIf="form.get('telefono').hasError('minlength') || form.get('telefono').hasError('maxlength')" 
+          text="El campo no cumple la longitud esperada"></p-message>
+        <p-message severity="error" 
+          *ngIf="form.get('telefono').hasError('pattern')" 
+          text="No es un numero valido">
+        </p-message> 
+        <p-message severity="error" 
+          *ngIf="form.get('telefono').hasError('telefonoInvalido')" 
+          text="No es un telefono valido">
+        </p-message>
+        
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputEmail1">Edad</label>
+        <input SoloNumeros formControlName="edad" type="text" maxlength="3" type="text" max="100" class="form-control" ><br/>
+        <p-message severity="error" 
+          *ngIf="form.get('edad').hasError('required')" 
+          text="El campo es requerido"></p-message>
+        <p-message severity="error" 
+          *ngIf="form.get('edad').hasError('minlength') || form.get('edad').hasError('maxlength')" 
+          text="El campo no cumple la longitud esperada"></p-message>
+        <p-message severity="error" 
+          *ngIf="form.get('edad').hasError('min') || form.get('edad').hasError('max')" 
+          text="la edad no debe ser mayor a 100"></p-message>
+        <p-message severity="error" 
+          *ngIf="form.get('edad').hasError('pattern')" 
+          text="No es una edad valida">
+        </p-message> 
+        <p-message severity="error" 
+          *ngIf="form.get('edad').hasError('edadInvalido')" 
+          text="No es una edad valida"></p-message>
+        
+      </div>
+
+      <div class="form-group">
+        <label>Correo</label>
+        <input formControlName="correo" type="text" class="form-control">
+        <p-message severity="error" 
+          *ngIf="form.get('correo').hasError('correoSinNombre')" 
+          text="El correo no contiene el nombre."></p-message>
+      </div>
+
+      <div class="form-group">
+        <label>Compañía</label>
+        <input formControlName="company" type="text" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label>Dirección</label>
+        <input formControlName="direccion" type="text" class="form-control">
+        <p-message severity="error" 
+          *ngIf="form.get('direccion').hasError('required')" 
+          text="El campo es requerido">
+        </p-message>
+      </div>
+      <!-- [disabled]="form.invalid" -->
+      <button (click)="guardar()" 
+      class="btn btn-primary">Guardar</button>
+
+    </form>
+  </div>
+</div>

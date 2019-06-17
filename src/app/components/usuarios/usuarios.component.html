@@ -1,0 +1,50 @@
+
+<h1>Listado de usuarios</h1>
+
+<p-messages [(value)]="msgs"></p-messages>
+<br/><br/>
+<button pButton type="button" icon="pi pi-plus" 
+    label="Agregar" routerLink="/crear-usuario"></button>
+
+<br/><br/>
+<div>
+<p-table [value]="usuarios" [paginator]="true" [rows]="5">
+  <ng-template pTemplate="header">
+      <tr>
+          <th style="width: 15%;">Nombre</th>
+          <th style="width: 15%;">Name</th>
+          <th style="width: 15%;">Teléfono</th>
+          <th style="width: 5%;">Edad</th>
+          <th style="width: 10%;">Correo</th>
+          <th style="width: 10%;">Compañía</th>
+          <th style="width: 20%;">Foto</th>
+          <th style="width: 10%;">Acción</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-usu>
+      <tr>
+          <td>{{usu.nombre}}</td>
+          <td>{{usu.name.first}} {{usu.name.last}}</td>
+          <td>{{usu.telefono}}</td>
+          <td>{{usu.edad}}</td>
+          <td>{{usu.correo}}</td>
+          <td>{{usu.company}}</td>
+          <td align="center">
+              <img src="{{usu.foto}}" style="height: 25%;">
+          </td>
+          <td align="center">
+            <button pButton class="btn btn-primary" 
+                icon="pi pi-trash" (click)="confirmarEliminar(usu.id)">
+            </button>
+
+            <button pButton class="btn btn-primary" 
+                icon="pi pi-pencil" [routerLink]="['/editar-usuario', usu.id ]"> 
+            </button>
+        </td>
+      </tr>
+  </ng-template>
+</p-table>
+</div>
+
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
